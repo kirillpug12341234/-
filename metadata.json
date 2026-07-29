@@ -1,0 +1,6 @@
+{
+  "name": "Telegram Instant Messenger",
+  "description": "Full-featured Telegram-like instant messaging app with real-time chats, secret chats, voice/video calls, channels, stories, AI bot, media sharing, and custom themes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
