@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novograd RP | Твой новый мир</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --secondary: #a29bfe;
+            --accent: #00cec9;
+            --dark: #0f0f13;
+            --card-bg: #1e1e24;
+            --text: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Анимация фона */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #2d2d44 0%, #0f0f13 100%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            padding: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            text-transform: uppercase;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(108, 92, 231, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #ccc;
+            margin-bottom: 40px;
+            max-width: 600px;
+        }
+
+        /* Instructions Section */
+        .instructions {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .step-card {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+        }
+
+        .step-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: rgba(255, 255, 255, 0.05);
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+
+        .step-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+        }
+
+        .step-card p {
+            color: #aaa;
+            margin-bottom: 15px;
+        }
+
+        .download-link {
+            display: block;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(0, 206, 201, 0.1);
+            color: var(--accent);
+            text-align: center;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+            word-break: break-all;
+        }
+
+        .download-link:hover {
+            background: rgba(0, 206, 201, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Animation classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-gradient"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">Novograd RP</div>
+            <a href="#start" class="btn">Начать играть</a>
+        </header>
+
+        <section class="hero">
+            <h1 class="fade-in">Добро пожаловать в <br><span>NOVOGRAD RP</span></h1>
+            <p class="fade-in">Погрузись в уникальный мир ролевой игры. Твоя история начинается здесь.</p>
+            <a href="#start" class="btn fade-in">Как начать?</a>
+        </section>
+
+        <section id="start" class="instructions">
+            <h2 class="section-title fade-in">🎮 КАК НАЧАТЬ ИГРАТЬ? 🎮</h2>
+            
+            <div class="steps-grid">
+                <!-- Step 1 -->
+                <div class="step-card fade-in">
+                    <div class="step-number">01</div>
+                    <h3>Скачай лаунчер</h3>
+                    <p>Тебе не нужно качать подозрительные лаунчеры! Всё делается через официальный клиент.</p>
+                    <p>Скачайте оригинальный лаунчер <strong>Radmir RP</strong> с официального сайта.</p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="step-card fade-in">
+                    <div class="step-number">02</div>
+                    <h3>Первичная настройка</h3>
+                    <p>Запустите лаунчер и дождитесь загрузки базового кэша игры.</p>
+                </div>
+
+                <!-- Step 3 & 4 combined for better flow -->
+                <div class="step-card fade-in">
+                    <div class="step-number">03</div>
+                    <h3>Поиск папки</h3>
+                    <p>Откройте «Мой компьютер» ➔ Диск C: ➔ Папка <strong>Program Files (x86)</strong>.</p>
+                    <p>Найдите папку <strong>RADMIR GAMES</strong>, зайдите в неё, а затем в папку <strong>RADMIR CRMP</strong>.</p>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="step-card fade-in" style="border-color: var(--accent);">
+                    <div class="step-number">04</div>
+                    <h3>Скачай файлы проекта</h3>
+                    <p>Это самый важный шаг! Скачай наши файлы по ссылке ниже:</p>
+                    <a href="https://drive.google.com/file/d/1cHfTkzulN47uo6mLnu7zhTfdeuveKq2x/view?usp=sharing" target="_blank" class="download-link">
+                        🔗 СКАЧАТЬ ФАЙЛЫ (Google Drive)
+                    </a>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="step-card fade-in">
+                    <div class="step-number">05</div>
+                    <h3>Установка файлов</h3>
+                    <p>Переместите скачанные файлы в папку <strong>RADMIR CRMP</strong>.</p>
+                    <p style="color: #ff7675;">⚠️ Обязательно согласитесь на замену файлов!</p>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="step-card fade-in" style="background: linear-gradient(135deg, var(--card-bg), rgba(108, 92, 231, 0.2));">
+                    <div class="step-number">06</div>
+                    <h3>Запуск игры</h3>
+                    <p>Запустите лаунчер Radmir, выберите любой сервер и наслаждайтесь игрой на <strong>NOVOGRAD RP</strong>!</p>
+                    <p style="margin-top: 10px; font-weight: bold; color: var(--accent);">Удачной игры! 🎉</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Novograd RP. Все права защищены.</p>
+            <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5;">Не является официальным сайтом Radmir RP. Проект использует модифицированные файлы.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Простая анимация появления при скролле
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
